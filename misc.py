@@ -80,7 +80,7 @@ def get_element(element, variable, mandatory=False, data_type=None):
 ##############
 def log_to_database(session):
 
-    from states import GAPS
+    from states import RPCS
 
     if 'log' in session and 'db' in session:
 
@@ -89,11 +89,6 @@ def log_to_database(session):
         event = get_element('event', session['cpe'])
         msg = get_element('msg', session['log'])
         result = get_element('rc', session['log'])
-
-        if event in RPCS.PROVISIONING_EVENTS:
-            stage = 0
-        else:
-            stage = 1
 
         # Log session result to the database
         session['db'].log(cid, ip, event, msg, result)
