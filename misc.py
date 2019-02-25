@@ -84,35 +84,16 @@ def log_to_database(session):
 
     if 'log' in session and 'db' in session:
 
-        # Notes:
-        # - use platform ("Lunar"/"Polar") as the "cpetype" because GAPS GUI
-        #   allows only a single firmware file per type
-        # - use cfgtype ("geneos") for "extcfgtype" field
-        # - use product ("Platinum_7840") for "product" field
-        # - use hwrev ("0.1") for "hw" field
-        # - add ".img" to software version to create firmware image name (fw)
-
-        client = get_element('client', session)
         cid = get_element('cid', client)
-
-        sid = get_element('sid', session['cpe'])
-        mac = get_element('mac', session['cpe'])
         ip = get_element('ip', session['cpe'])
         event = get_element('event', session['cpe'])
-        fw = ''.join(filter(None, (get_element('software_version', session['cpe']), '.img')))
-        product = get_element('product', session['cpe'])
-        cpetype = get_element('platform', session['cpe'])
-        extcfgtype = get_element('cfgtype', session['cpe'])
-        hw = get_element('hwrev', session['cpe'])
-
         msg = get_element('msg', session['log'])
         result = get_element('rc', session['log'])
 
-        if event in GAPS.PROVISIONING_EVENTS:
+        if event in RPCS.PROVISIONING_EVENTS:
             stage = 0
         else:
             stage = 1
 
         # Log session result to the database
-        #
-        session['db'].log(mac, ip, msg, fw, cpetype, result, extcfgtype, product, hw, sid, cid, stage)
+        session['db'].log(cid, ip, event, msg, result)
