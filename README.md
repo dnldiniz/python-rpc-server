@@ -1,6 +1,11 @@
 # python-rpc-server
 Asyncio-based Python RPC Server implemented as state machine, supporting TLS connections based on signed certificates. Implements both RPC Server and Client mode, and listens to both "southbound" and "northbound" connections. Full unit test suite included.
 
+# Requirements
+To be able to use the TLS authenticated connection, a root and a signed certificate are needed.
+These need to be placed at /sbin/rpcsd/
+For more information on how to generate those, please contact me.
+
 # Basic functionality
 While on server mode, the daemon listens to the interface configured in config.py.
 As it is, the first expected message from a client is an "inform" RPC, which should give the server some basic information about the client.
