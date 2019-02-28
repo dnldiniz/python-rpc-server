@@ -8,10 +8,10 @@ import traceback
 
 from distutils.version import StrictVersion
 
-from config import LOG, RPCS_INTERFACE, RPCS_PORT
+from config import LOG, RPCSD_INTERFACE, RPCSD_PORT
 from db import Db, DbException
 from misc import get_element, MandatoryFieldNotFoundError, UnexpectedFieldDataType
-from rpc import ClientMethodException, RpcExecute
+from rpc import ClientMethodException
 
 
 class ClientResponseError(Exception):

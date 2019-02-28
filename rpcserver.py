@@ -288,7 +288,7 @@ def main():
     """
     configure_logger()
 
-    LOG.info("Starting PYRPC ServerD...")
+    LOG.info("Starting Python RPC Server Daemon...")
     loop = asyncio.get_event_loop()
     loop.add_signal_handler(signal.SIGTERM, functools.partial(shutdown, loop))
     RPCS().Listening.run_forever(session_handler, nb_session_handler)
